@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+	<title>Job Sites</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row text-center">
+			<h3>Edit {{job_site.name}} Job Crawler</h3>
+		</div>
+		<div class="row">
+			<form action="{% url 'edit-job-crawler' job_site.name|slugify job_site.id %}" method="post">
+				{% csrf_token %}
+				<input type="hidden" name="job_site" value="{{job_site.id}}">
+			
+        {% for crawler in job_site.crawlers %}
+            {% for name, value in job_fields %}
+                {% if crawler.job_field == value %}
+				<div class="col-12">
+                	<input type="hidden" name="{{name}}-id" value="{{crawler.id}}">
+					<div class="row">
+						<div class="col-md-6 mb-3">
+	  						<label class="form-label">Job Field</label>
+                            <input type="text" class="form-control" name="{{name}}-job_field" value="{{value}}" readonly="">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label">Tag</label>
+	  						<input class="form-control" type="text" name="{{name}}-tag" value="{{crawler.tag}}" required="">
+						</div>
+					</div>
+				</div>
+				{% endif %}
+            {% endfor %}
+        {% empty %}
+            <input type="hidden" name="form_status" value="ADD">
+            <input type="hidden" name="sub_link" value="{{job_site.link}}">
+            {% for name, value in job_fields %}
+            	<div class="col-12">
+                	<input type="hidden" name="{{name}}-id" value="{{crawler.id}}">
+					<div class="row">
+						<div class="col-md-6 mb-3">
+	  						<label class="form-label">Job Field</label>
+                            <input type="text" class="form-control" name="{{name}}-job_field" value="{{value}}" readonly="">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label">Tag</label>
+	  						<input class="form-control" type="text" name="{{name}}-tag" value="{{crawler.tag}}" required="">
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+        {% endfor %}
+				<div class="col-12">
+					<div class="row">
+						<button class="btn btn-primary">SUBMIT</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	<!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>

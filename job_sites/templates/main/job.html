@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+	<title>Job Sites</title>
+</head>
+<body>
+	<div class="container">
+		<!-- Begins Profile Body  -->
+        	<div class="row">
+	            <div class="col-md-12">
+	                <div class="card">
+	                    <div class="card-body">
+						<!-- Profile Details -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <h5 class="card-title d-flex justify-content-between text-center pt-5">
+                                        <span>Job Details</span> 
+                                    </h5>
+                                    <div class="row pt-4">
+                                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Job Name</p>
+                                        <p class="col-sm-10">{{job_profile.name}}</p>
+                                    </div>
+                                    <div class="row pt-4">
+                                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Organization</p>
+                                        <p class="col-sm-10">{{job_profile.organization}}</p>
+                                    </div>
+                                    <div class="row pt-4">
+                                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Experience</p>
+                                        <p class="col-sm-10">{{job_profile.experience}}</p>
+                                    </div>
+                                    <div class="row pt-4">
+                                        <p class="col-sm-2 text-muted text-sm-right mb-0">Address</p>
+                                        <p class="col-sm-10 mb-0">{{job_profile.address}}.</p>
+                                    </div>
+                                    <div class="row pt-4">
+                                        <p class="col-sm-2 text-muted text-sm-right mb-0">Link</p>
+                                        <p class="col-sm-10 mb-0">{{job_profile.link}}.</p>
+                                    </div>
+                                    <div class="row pt-4">
+                                        <p class="col-sm-2 text-muted text-sm-right mb-0">Status</p>
+                                        <p class="col-sm-10 mb-0">{{job_profile.status}}.</p>
+                                    </div>
+                                    <div class="row pt-4">
+                                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Deadline</p>
+                                        <p class="col-sm-10">{{job_profile.deadline}}</p>
+                                    </div>
+                                    <div class="row pt-4">
+                                        <p class="col-sm-2 text-muted text-sm-right mb-0 mb-sm-3">Date Created</p>
+                                        <p class="col-sm-10">{{job_profile.date_created.date}}</p>
+                                    </div>
+                                    <div class="row pt-4">
+                                        <p class="col-sm-2 text-muted text-sm-right mb-0">Description</p>
+                                        <p class="col-sm-10 mb-0">{{job_profile.description}}.</p>
+                                    </div>
+                                    <div class="row pt-4">
+                                        <p class="col-sm-2 text-muted text-sm-right mb-0"></p>
+                                        <div class="col-sm-10 mb-0">
+                                        	<div class="table-responsive">
+				                                <table class="table table-striped">
+				                                    <thead>
+				                                        <tr>
+				                                            <th>Qualifications</th>
+				                                        </tr>
+				                                    </thead>
+				                                    <tbody>
+				                                    {% for qualification in job_profile.qualifications %}
+				                                        <tr>
+				                                            <td>{{qualification.name}}</td>
+				                                        </tr>
+				                                    {% endfor %}
+				                                    </tbody>
+				                                </table>
+				                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row pt-4">
+                                        <p class="col-sm-2 text-muted text-sm-right mb-0"></p>
+                                        <div class="col-sm-10 mb-0">
+                                        	<div class="table-responsive">
+				                                <table class="table table-striped">
+				                                    <thead>
+				                                        <tr>
+				                                            <th>Attribute</th>
+				                                        </tr>
+				                                    </thead>
+				                                    <tbody>
+				                                    {% for attribute in job_profile.attributes %}
+				                                        <tr>
+				                                            <td>{{attribute.name}}</td>
+				                                        </tr>
+				                                    {% endfor %}
+				                                    </tbody>
+				                                </table>
+				                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        <!-- /Profile Details -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- --Ends Profile Body -->
+
+
+	</div>
+
+
+	<!-- Option 2: Separate Popper and Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>

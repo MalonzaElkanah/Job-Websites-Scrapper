@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+	<title>{{job_site.name}} Job Site</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row text-center pt-5">
+			<h3>{{job_site.name}} Data Crawler</h3>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<table class="table">
+					<thead>
+					    <tr>
+					      	<th scope="col">Link</th>
+					      	<th scope="col">Job Field</th>
+					      	<th scope="col">Tag</th>
+					    </tr>
+					</thead>
+					<tbody>
+					{% for crawler in job_site.crawlers %}
+					    <tr>
+					      	<td><a href="{{crawler.job_site.link}}">{{crawler.job_site.link}}</a></td>
+                            <td>{{crawler.job_field}}</td>
+                            <td>{{crawler.tag}}</td>
+					    </tr>
+					{% empty %}
+						<tr>
+							<td colspan="6" class="text-center">No Data Crawler...<a href="{% url 'edit-job-crawler' job_site.name|slugify job_site.id %}">Click Here to add.</a></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div class="col-12">
+				<a href="{% url 'edit-job-crawler' job_site.name|slugify job_site.id %}" class="btn btn-primary">Edit Data Crawlers</a>
+				<a href="{% url 'scrap-job-site' job_site.name|slugify job_site.id %}" class="btn btn-success">Scrap Jobs</a>
+			</div>
+		</div>
+		<div class="row text-center pt-5">
+			<h3>{{job_site.name}} Jobs Scrapped</h3>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<table class="table">
+					<thead>
+					    <tr>
+					    	<th scope="col">#</th>
+					      	<th>Name</th>
+                            <th>Experience</th>
+                            <th>Organization</th>
+                            <th>Address</th>
+                            <th>Date Scrapped</th>
+                            <th>Deadline</th>
+                            <th>Action</th>
+					    </tr>
+					</thead>
+					<tbody>
+					{% for job in job_site.job_data %}
+					    <tr>
+					      	<th scope="row">{{forloop.counter}}</th>
+                            <td><a href="#" title="Details">{{job.name}}</a></td>
+                            <td>{{job.experience}}</td>
+                            <td>{{job.organization}}</td>
+                            <td>{{job.address}}</td>
+                            <td>{{job.date_created}}</td>
+                            <td>{{job.deadline}}</td>
+                            <td><a href="{% url 'job' job.name|slugify job.id %}" class="btn btn-primary">View</a></td>
+					    </tr>
+					{% empty %}
+						<tr>
+							<td colspan="8" class="text-center">No Job Scrapped...<a href="{% url 'scrap-job-site' job_site.name|slugify job_site.id %}">Click Here to Scrap.</a></td>
+						</tr>
+					{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<div class="col-12">
+				<a href="{% url 'scrap-job-site' job_site.name|slugify job_site.id %}" class="btn btn-primary">Scrap Job Data</a>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+</body>
+</html>
